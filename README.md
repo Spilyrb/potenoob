@@ -17,6 +17,46 @@ Effetti comuni a tutte le mappe: cielo con gradiente e nuvole dipinte in movimen
 scorrono, mare di nuvole sotto le isole, isole lontane che fluttuano sullo sfondo, nebbia atmosferica,
 bloom sui materiali emissivi, ombre in tempo reale, vegetazione mossa dal vento.
 
+## Arene per Roblox (stile "studs", layout tipo Brawlhalla)
+
+![Arene Roblox](screenshots/roblox_overview.jpg)
+
+Le stesse 4 mappe sono rifatte come **arene da picchiaduro a piattaforme**, in stile Roblox "studs":
+erba lime, terra corallo, pietra pastello, legno arancio, ogni faccia con i bottoncini (studs).
+
+| File | Cosa fare |
+|---|---|
+| `roblox/out/<arena>.rbxmx` | **Consigliato.** In Roblox Studio: tasto destro su *Workspace* → *Inserisci da file…* (Insert from File) → scegli il file |
+| `roblox/out/<arena>.builder.luau` | Alternativa: apri il file, copia tutto, incollalo nella *Command Bar* di Studio e premi Invio. Costruisce lo stesso modello |
+
+Arene: `mines` (Miniere Sospese), `fort` (Forte di Vento), `wreck` (Relitto Celeste, al tramonto), `zen` (Giardino Zen).
+
+**Layout di gioco** (uguale in tutte le arene, in studs, modello centrato in X = 0):
+
+- `Stage/MainPlatform`: piattaforma principale, 100 × 28 studs, superficie a **Y = 0**, bordi dritti per gli appigli.
+- `Stage/SoftPlatforms/Soft_Left`, `Soft_Right` a Y = 24 e `Soft_Top` a Y = 44. Sono collidibili: il "passa da sotto"
+  lo gestisce il tuo script di gioco usando questa cartella.
+- `Stage/Spawns/Spawn_1..4`, `Stage/CameraFocus`, `Stage/BlastZone` (260 × 200 studs): parti invisibili di riferimento.
+- I combattenti si muovono sul piano **Z = 0** e la camera guarda da +Z. Se il tuo gioco usa l'asse X come profondità,
+  ruota il modello di 90°.
+- `Background/…`: scenografia senza collisioni (`CanCollide`, `CanTouch` e `CanQuery` disattivati).
+
+**Effetti**: lo script `StageFX` dentro il modello (Script con `RunContext = Client`, quindi gira su ogni client senza
+pesare sul server) anima mulino, cassa e piattaforma che oscillano, isole e detriti che fluttuano, nuvole che scorrono,
+bandiere, stendardi, vela e cascate. Aggiunge anche scintille, nebbiolina, petali, foglie nel vento, braci, luci delle
+lanterne che tremolano e imposta Lighting, Atmosphere, ColorCorrection, Bloom e nuvole del Terrain.
+Per tenere l'illuminazione del tuo gioco metti `ApplyLighting` = false. Le texture delle particelle sono quelle
+integrate in Roblox: non serve caricare asset.
+
+Rigenerare i file dopo aver modificato `roblox/stages.mjs`:
+
+```bash
+npm run roblox            # scrive roblox/out/*.rbxmx, *.builder.luau e public/stages/*.json
+npm run dev               # anteprima: http://localhost:5173/stage.html?stage=zen
+```
+
+![Dettaglio studs](screenshots/roblox_closeup.jpg)
+
 ## Avvio
 
 ```bash
@@ -52,6 +92,8 @@ src/
   maps/     common.js (isole fluttuanti, lanterne, stoffe che sventolano, isole di sfondo) + una mappa per file
 public/textures/kenney-voxel/   texture scaricate (CC0)
 models/                         export .glb
+roblox/                         generatore arene Roblox (stages.mjs, lib/, StageFX.client.luau) + out/*.rbxmx
+src/stage/                      anteprima browser delle arene Roblox (stage.html)
 scripts/                        export GLB e screenshot automatici (Playwright)
 ```
 

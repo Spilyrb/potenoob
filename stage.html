@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arene Roblox</title>
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <header id="tabs" role="tablist" aria-label="Arene"></header>
+  <div id="title" aria-live="polite"><span class="icon"></span><span class="name"></span></div>
+  <aside id="panel">
+    <button id="btn-rotate" type="button" aria-pressed="false">Auto-rotazione</button>
+    <button id="btn-side" type="button">Vista di gioco</button>
+    <p class="hint">Anteprima delle arene generate per Roblox (.rbxmx) in stile studs</p>
+  </aside>
+  <div id="loading">Caricamento arena…</div>
+  <script type="module" src="./src/stage/preview.js"></script>
+</body>
+</html>
