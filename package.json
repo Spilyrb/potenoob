@@ -1,0 +1,20 @@
+{
+  "name": "potenoob-voxel-sky-maps",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Mappe voxel fluttuanti 3D con VFX e animazioni (three.js)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "export:glb": "node scripts/export-glb.mjs",
+    "shots": "node scripts/screenshots.mjs"
+  },
+  "dependencies": {
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "vite": "8.3.7"
+  }
+}

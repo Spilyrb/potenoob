@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Isole Voxel</title>
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <header id="tabs" role="tablist" aria-label="Mappe"></header>
+  <div id="title" aria-live="polite"><span class="icon"></span><span class="name"></span></div>
+  <aside id="panel">
+    <button id="btn-rotate" type="button" aria-pressed="true">Auto-rotazione</button>
+    <button id="btn-export" type="button">Esporta GLB</button>
+    <button id="btn-shot" type="button">Screenshot</button>
+    <p class="hint">Trascina per ruotare · rotella per zoom · tasto destro per spostare</p>
+  </aside>
+  <div id="loading">Generazione voxel…</div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

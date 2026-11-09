@@ -1,0 +1,57 @@
+:root {
+  --chip-bg: rgba(28, 32, 48, 0.86);
+  --chip-fg: #ffffff;
+  --chip-active: #f2c84b;
+  --panel-bg: rgba(20, 24, 36, 0.72);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #8fd0ff; font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif; }
+#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+#tabs {
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: calc(100% - 32px); z-index: 2;
+}
+#tabs button {
+  display: flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px;
+  background: var(--chip-bg); color: var(--chip-fg); border: 2px solid transparent; border-radius: 10px;
+  font: 700 15px/1 inherit; cursor: pointer; clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  padding-right: 22px;
+}
+#tabs button[aria-selected='true'] { border-color: var(--chip-active); color: var(--chip-active); }
+#tabs svg { width: 22px; height: 22px; }
+
+#title {
+  position: fixed; left: 16px; top: 64px; display: flex; align-items: center; gap: 10px;
+  background: var(--chip-bg); color: #fff; padding: 10px 26px 10px 12px; border-radius: 8px;
+  font: 800 26px/1 inherit; text-shadow: 0 2px 0 rgba(0,0,0,0.35); z-index: 2;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+}
+#title svg { width: 34px; height: 34px; }
+
+#panel {
+  position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 6px;
+  background: var(--panel-bg); padding: 10px; border-radius: 10px; z-index: 2; max-width: 240px;
+}
+#panel button {
+  background: #f2c84b; color: #2a1e08; border: 0; border-radius: 6px; padding: 8px 10px;
+  font: 700 13px/1 inherit; cursor: pointer;
+}
+#panel button[aria-pressed='false'] { background: #c9c9c9; }
+#panel .hint { color: #e8eefc; font-size: 11px; margin: 4px 0 0; }
+
+#loading {
+  position: fixed; inset: 0; display: grid; place-items: center; color: #fff; font: 800 22px/1 inherit;
+  background: linear-gradient(#5aa9f0, #bfe6ff); z-index: 5; transition: opacity 0.4s;
+}
+#loading.hidden { opacity: 0; pointer-events: none; }
+
+body.capture #tabs, body.capture #panel { display: none; }
+
+@media (max-width: 640px) {
+  #tabs button { font-size: 12px; padding: 6px 16px 6px 8px; }
+  #tabs .lbl { display: none; }
+  #title { font-size: 18px; top: 58px; }
+  #panel { left: 16px; right: 16px; max-width: none; flex-direction: row; flex-wrap: wrap; }
+  #panel .hint { display: none; }
+}
